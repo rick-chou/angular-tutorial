@@ -1,0 +1,32 @@
+<div class="mb-8 flex justify-center">
+  <button nz-button nzType="primary" (click)="openDrawer()" class="mr-8">Drawer</button>
+  <button nz-button nzType="primary" (click)="openModal()" class="mr-8">Modal</button>
+  <button nz-button nzType="primary" (click)="getEdiotrInfo()" class="mr-8">GetEdiotrInfo</button>
+</div>
+
+<div class="h-[70vh]">
+  <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="value" (onInit)="init($event)" class="!h-full"></ngx-monaco-editor>
+</div>
+
+<nz-drawer [nzClosable]="false" nzWidth="80vw" [nzVisible]="drawer_visible" nzPlacement="right" nzTitle="Editor" (nzOnClose)="closeDrawer()" [nzExtra]="setting">
+  <ng-container *nzDrawerContent>
+    <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="value" class="!h-full" (onInit)="init($event)"></ngx-monaco-editor>
+  </ng-container>
+</nz-drawer>
+
+<nz-modal [(nzVisible)]="modal_visible" [nzTitle]="setting" nzCentered="true" (nzOnCancel)="closeModal()" [nzFooter]="null" nzWidth="80vw" [nzBodyStyle]="{ height: '80vh' }">
+  <ng-container *nzModalContent>
+    <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="value" class="!h-full" (onInit)="init($event)"></ngx-monaco-editor>
+  </ng-container>
+</nz-modal>
+
+<ng-template #setting>
+  <div class="flex items-center">
+    <nz-switch class="setting" [(ngModel)]="isEdit" nzCheckedChildren="edit" nzUnCheckedChildren="read" (ngModelChange)="setOptions()"></nz-switch>
+    <nz-select [(ngModel)]="theme" (ngModelChange)="setOptions()" class="w-44 mx-4">
+      <nz-option nzValue="vs" nzLabel="Visual Studio"></nz-option>
+      <nz-option nzValue="vs-dark" nzLabel="Visual Studio Dark"></nz-option>
+      <nz-option nzValue="hc-black" nzLabel="Hight Contrast Dark"></nz-option>
+    </nz-select>
+  </div>
+</ng-template>

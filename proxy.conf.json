@@ -1,0 +1,11 @@
+{
+  "/dailySentence": {
+    "target": "https://sentence.iciba.com/index.php",
+    "logLevel": "debug",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/dailySentence": ""
+    }
+  }
+}

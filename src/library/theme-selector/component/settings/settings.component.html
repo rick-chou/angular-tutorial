@@ -1,0 +1,59 @@
+<div class="fixed left-0 z-40 max-h-screen translate-y-1/2 shadow-xl bottom-1/2 bg-gray-700 rounded-r-2xl" [ngClass]="{
+		'translate-x-0': colorsOpen,
+		'-translate-x-full': !colorsOpen,
+		'transition-transform duration-300 transform': loaded
+	}" (click)="$event.stopPropagation()">
+	<p class="p-2 text-center capitalize" [ngClass]="['text' + light]">
+		{{ selectedColor.name }}
+	</p>
+	<div class="flex flex-col items-center justify-center">
+		<!-- Color palette -->
+		<div class="grid grid-cols-2 gap-1 px-3 grid-">
+			<button *ngFor="let color of colors" title="Set primary color to {{ color.name }}" type="button"
+				class="w-8 h-8 border rounded" [ngClass]="[
+					'bg-' + color.name + '-500',
+					'border-' + color.name + '-900',
+					'hover:ring-2',
+					'hover:ring-inset',
+					'hover:ring-gray-100',
+					selectedColor.name == color.name ? 'ring-2 ring-inset ring-gray-300' : ''
+				]" (click)="changeColor(color)"></button>
+		</div>
+
+		<button type="button" (click)="toggleColors()"
+			class="absolute flex items-center justify-center h-32 transform translate-y-1/2 w-7 bottom-1/2 rounded-r-xl left-full bg-gray-700 text-gray-50 focus:outline-none">
+			<span class="sr-only">Toggle</span>
+			<span style="writing-mode: vertical-lr; text-orientation: upright"
+				class="font-mono text-sm antialiased font-medium">
+				COLORS
+			</span>
+			<span class="sr-only">menu</span>
+		</button>
+
+		<!-- Light/Dark theme -->
+		<div class="my-4 rounded-full power-switch bg-gray-800">
+			<input #themeCheckbox type="checkbox" aria-label="Dark mode toggle" [checked]="isDarkTheme | async"
+				(change)="toggleDarkTheme(themeCheckbox.checked)" />
+			<div class="button">
+				<svg class="power-off">
+					<use xlink:href="#line" class="line" />
+					<use xlink:href="#circle" class="circle" />
+				</svg>
+				<svg class="power-on">
+					<use xlink:href="#line" class="line" />
+					<use xlink:href="#circle" class="circle" />
+				</svg>
+			</div>
+		</div>
+
+		<!-- SVG -->
+		<svg xmlns="http://www.w3.org/2000/svg" class="hidden fill-current">
+			<symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="line">
+				<line x1="75" y1="34" x2="75" y2="58" />
+			</symbol>
+			<symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="circle">
+				<circle cx="75" cy="80" r="35" />
+			</symbol>
+		</svg>
+	</div>
+</div>
