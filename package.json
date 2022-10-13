@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build:ubuntu": "ng build --base-href /rick/angular/",
-    "build:github": "ng build --base-href /angular/tutorial/",
+    "build:github": "ng build --base-href /angular-tutorial/",
     "watch": "ng build --watch --configuration development",
     "analyze": "ng build --stats-json && node_modules/.bin/webpack-bundle-analyzer dist/ng-tutorial/stats.json -r assets/analyze.html -m static",
     "analyze-server": "ng build --stats-json && node_modules/.bin/webpack-bundle-analyzer dist/ng-tutorial/stats.json",
