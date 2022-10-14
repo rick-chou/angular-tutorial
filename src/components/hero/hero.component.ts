@@ -1,9 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { BaseComponent } from '@library/theme-selector/base.component';
 import { HttpService } from '@services/http.service';
 
 @Component({
   selector: 'app-hero',
+  standalone: true,
+  imports: [CommonModule],
   template: `
     <section class="">
       <div [ngClass]="['bg' + primary]">

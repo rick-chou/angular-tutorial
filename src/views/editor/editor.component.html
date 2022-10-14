@@ -1,11 +1,12 @@
 <div class="mb-8 flex justify-center">
   <button nz-button nzType="primary" (click)="openDrawer()" class="mr-8">Drawer</button>
   <button nz-button nzType="primary" (click)="openModal()" class="mr-8">Modal</button>
-  <button nz-button nzType="primary" (click)="getEdiotrInfo()" class="mr-8">GetEdiotrInfo</button>
+  <button nz-button nzType="primary" (click)="getEditorInfo()" class="mr-8">GetEditorInfo</button>
 </div>
 
-<div class="h-[70vh]">
-  <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="value" (onInit)="init($event)" class="!h-full"></ngx-monaco-editor>
+<div class="grid sm:grid-cols-2 gap-6 h-[70vh]">
+  <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="value" (onInit)="init($event)" class="!h-full" (ngModelChange)="renderMd()"></ngx-monaco-editor>
+  <article class="prose lg:prose-xl h-[70vh] overflow-y-scroll px-4 scroll-decoration" [innerHTML]="markdown" #md></article>
 </div>
 
 <nz-drawer [nzClosable]="false" nzWidth="80vw" [nzVisible]="drawer_visible" nzPlacement="right" nzTitle="Editor" (nzOnClose)="closeDrawer()" [nzExtra]="setting">

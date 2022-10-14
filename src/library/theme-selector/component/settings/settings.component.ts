@@ -3,9 +3,12 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { BaseComponent } from '../../base.component';
 import { TailwindColor } from '../../interfaces/tailwind-colors.interface';
 import { Observable, Subscription } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'custom-settings',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
 })

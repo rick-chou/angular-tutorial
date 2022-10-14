@@ -1,18 +1,20 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { editor } from 'monaco-editor';
-import { READ_EDITOR_OPTIONS } from './editor.config';
+import { EDIT_EDITOR_OPTIONS } from './editor.config';
 import { HttpClient } from '@angular/common/http';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
-import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { MonacoEditorModule } from '@rickzhou/ngx-monaco-editor';
 import { FormsModule } from '@angular/forms';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { renderMarkdown } from 'monaco-editor/esm/vs/base/browser/markdownRenderer';
 
 @Component({
   selector: 'app-editor',
   standalone: true,
+  providers: [NzModalService],
   imports: [NzSwitchModule, NzModalModule, NzSelectModule, MonacoEditorModule, FormsModule, NzDrawerModule, NzButtonModule],
   styles: [
     `
@@ -22,6 +24,9 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
             background-color: #1890ff !important;
           }
         }
+        .scroll-decoration {
+          box-shadow: #dddddd 0 6px 6px -6px inset;
+        }
         .EDITOR_HIGHLIGHT_CLASS {
           background: yellow;
         }
@@ -30,13 +35,15 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
   ],
   templateUrl: './editor.component.html',
 })
-export class EditorComponent {
-  public readonly editorOptions = READ_EDITOR_OPTIONS;
-  public isEdit = false;
+export class EditorComponent implements OnInit, AfterViewInit {
+  @ViewChild('md') md!: ElementRef<HTMLDivElement>;
+  public readonly editorOptions = EDIT_EDITOR_OPTIONS;
+  public isEdit = true;
   public theme = 'vs';
   public value!: string;
   public drawer_visible = false;
   public modal_visible = false;
+  public markdown!: string;
 
   private editor!: editor.ICodeEditor;
 
@@ -44,6 +51,13 @@ export class EditorComponent {
 
   ngOnInit() {
     this.http.get('assets/ngx-monaco-editor.md', { responseType: 'text' }).subscribe((res) => (this.value = res));
+  }
+
+  ngAfterViewInit() {
+    this.md.nativeElement.addEventListener('scroll', (event) => {
+      // const target: HTMLDivElement = event.target as any;
+      // this.editor.setScrollPosition({ scrollTop: (target.scrollTop / (target.scrollHeight - screen.height * 0.7)) * this.editor.getContentHeight() });
+    });
   }
 
   public openDrawer(): void {
@@ -84,9 +98,17 @@ export class EditorComponent {
         },
       ]
     );
+
+    this.editor.onDidScrollChange((event) => {
+      this.md.nativeElement.scrollTo({
+        top: (event.scrollTop / (event.scrollHeight - screen.height * 0.7)) * this.md.nativeElement.scrollHeight,
+      });
+    });
+
+    this.renderMd();
   }
 
-  public getEdiotrInfo() {
+  public getEditorInfo() {
     console.log('editor>>>', this.editor);
     console.log('model>>>', this.editor.getModel());
   }
@@ -97,5 +119,9 @@ export class EditorComponent {
       theme: this.theme,
       readOnly: !this.isEdit,
     });
+  }
+
+  public renderMd() {
+    this.markdown = renderMarkdown({ value: this.editor.getValue() }).element.innerHTML;
   }
 }

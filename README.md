@@ -169,7 +169,7 @@ module.exports = {
 
 angular-tutorial demo 已经上线了 可以在线查看啦 （ 功能就一丢丢 还在补充中 👨‍💻 ）
 
-> http://124.223.71.181/rick/angular/
+> https://rick-chou.github.io/angular-tutorial/
 
 
 ![Screen Shot 2022-08-12 at 11.27.03.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/adcb15fc3b344ae4a5d976d3c8402341~tplv-k3u1fbpfcp-watermark.image?)
