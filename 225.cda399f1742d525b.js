@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkng_tutorial=self.webpackChunkng_tutorial||[]).push([[225],{9225:(l,n,e)=>{e.r(n),e.d(n,{RouterComponent:()=>a});var o=e(4650);let a=(()=>{class t{}return t.\u0275fac=function(r){return new(r||t)},t.\u0275cmp=o.Xpm({type:t,selectors:[["router"]],standalone:!0,features:[o.jDz],decls:0,vars:0,template:function(r,s){},encapsulation:2}),t})()}}]);
