@@ -11,7 +11,7 @@ import { BasicSyntaxModule } from '@views/basic-syntax/basic-syntax.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, BrowserAnimationsModule, FormsModule, HttpClientModule, AppRoutingModule, BasicSyntaxModule, SettingsComponent, MonacoEditorModule.forRoot()],
+  imports: [BrowserModule, BrowserAnimationsModule, FormsModule, HttpClientModule, SettingsComponent, MonacoEditorModule.forRoot(), AppRoutingModule, BasicSyntaxModule],
   providers: [],
   bootstrap: [AppComponent],
 })

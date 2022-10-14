@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { BaseComponent } from '@library/theme-selector/base.component';
 import { HttpService } from '@services/http.service';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   template: `
     <section class="">
       <div [ngClass]="['bg' + primary]">
@@ -25,7 +26,7 @@ import { HttpService } from '@services/http.service';
     </section>
   `,
 })
-export class HeroComponent extends BaseComponent {
+export class HeroComponent extends BaseComponent implements OnInit {
   public dailySentence = '';
   public bannerImgSrc = 'https://source.unsplash.com/random/4800x3200';
   constructor(private httpService: HttpService) {
