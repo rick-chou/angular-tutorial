@@ -1,0 +1,18 @@
+version: '3'
+services:
+
+  web:
+    # 指定 image
+    image: angular-tutorial
+
+    # 或者 指定 Dockerfile 所在文件路径 
+    # build: .
+    ports:
+      - "8080:80"
+    restart: always
+
+  express:
+    image: express-restful-api
+    ports:
+      - "3000:3000"
+    restart: always

@@ -1,18 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from './http.service';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzUploadFile, NzUploadModule } from 'ng-zorro-antd/upload';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'http',
   standalone: true,
+  imports: [NzCardModule, NzUploadModule, NzButtonModule],
   templateUrl: './http.component.html',
 })
 export class HttpComponent implements OnInit {
-  constructor(private http: HttpService) {}
-  ngOnInit(): void {
-    this.http.echoCode('get', { code: 400 }).subscribe(console.log);
-    this.http.echoCode('post', { code: 400 }).subscribe(console.log);
-    this.http.echoCode('delete', { code: 200 }).subscribe(console.log);
-    this.http.echoCode('put', { code: 301 }).subscribe(console.log);
-    this.http.echoCode('patch', { code: 500 }).subscribe(console.log);
-  }
+  public fileList: NzUploadFile[] = [];
+
+  constructor(private http: HttpService, private httpClient: HttpClient) {}
+  ngOnInit(): void {}
+
+  public handleUpload = (file: NzUploadFile, fileList: NzUploadFile[]) => {
+    const formData = new FormData();
+    formData.append('file', file as unknown as File);
+    this.http.uploadFile(formData).subscribe((event) => {
+      console.log(event);
+    });
+    return false;
+  };
 }

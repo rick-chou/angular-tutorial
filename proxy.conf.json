@@ -1,11 +1,11 @@
 {
-  "/dailySentence": {
-    "target": "https://sentence.iciba.com/index.php",
-    "logLevel": "debug",
+  "/api": {
+    "target": "http://124.223.71.181",
     "secure": true,
+    "logLevel": "debug",
     "changeOrigin": true,
-    "pathRewrite": {
-      "^/dailySentence": ""
+    "headers": {
+      "Origin": "http://124.223.71.181"
     }
   }
 }
