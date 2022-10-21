@@ -1,5 +1,7 @@
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpInterceptorService } from './http/http-interceptor';
 
 const routes: Routes = [
   {
@@ -9,6 +11,10 @@ const routes: Routes = [
       {
         path: 'directive',
         loadComponent: () => import('@views/basic-syntax/directive/directive.component').then((mod) => mod.DirectiveComponent),
+      },
+      {
+        path: 'pipe',
+        loadComponent: () => import('@views/basic-syntax/pipe/pipe.component').then((mod) => mod.PipeComponent),
       },
       {
         path: 'lifecycle-hooks',
@@ -33,5 +39,12 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true,
+    },
+  ],
 })
 export class BasicSyntaxModule {}

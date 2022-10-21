@@ -21,6 +21,14 @@
   </ng-container>
 </nz-modal>
 
+<nz-drawer [nzClosable]="false" nzWidth="80vw" [nzVisible]="modal_json_visible" nzPlacement="right" nzTitle="Editor" (nzOnClose)="closeDrawer()">
+  <ng-container *nzDrawerContent>
+    <div>
+      <ngx-json-viewer [json]="editor" [expanded]="false"></ngx-json-viewer>
+    </div>
+  </ng-container>
+</nz-drawer>
+
 <ng-template #setting>
   <div class="flex items-center">
     <nz-switch class="setting" [(ngModel)]="isEdit" nzCheckedChildren="edit" nzUnCheckedChildren="read" (ngModelChange)="setOptions()"></nz-switch>

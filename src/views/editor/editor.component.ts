@@ -10,12 +10,13 @@ import { FormsModule } from '@angular/forms';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { renderMarkdown } from 'monaco-editor/esm/vs/base/browser/markdownRenderer';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
 @Component({
   selector: 'app-editor',
   standalone: true,
   providers: [NzModalService],
-  imports: [NzSwitchModule, NzModalModule, NzSelectModule, MonacoEditorModule, FormsModule, NzDrawerModule, NzButtonModule],
+  imports: [NzSwitchModule, NzModalModule, NzSelectModule, MonacoEditorModule, FormsModule, NzDrawerModule, NzButtonModule, NgxJsonViewerModule],
   styles: [
     `
       ::ng-deep {
@@ -43,9 +44,10 @@ export class EditorComponent implements OnInit, AfterViewInit {
   public value!: string;
   public drawer_visible = false;
   public modal_visible = false;
+  public modal_json_visible = false;
   public markdown!: string;
 
-  private editor!: editor.ICodeEditor;
+  public editor: editor.ICodeEditor;
 
   constructor(private http: HttpClient) {}
 
@@ -66,6 +68,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
 
   public closeDrawer(): void {
     this.drawer_visible = false;
+    this.modal_json_visible = false;
   }
 
   public openModal(): void {
@@ -109,6 +112,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
   }
 
   public getEditorInfo() {
+    this.modal_json_visible = true;
     console.log('editor>>>', this.editor);
     console.log('model>>>', this.editor.getModel());
   }

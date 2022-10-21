@@ -1,5 +1,4 @@
 export const environment = {
   production: true,
-  loading: true,
-  backend: 'https://sentence.iciba.com/index.php',
+  backend: 'http://124.223.71.181:3000/api/express',
 };

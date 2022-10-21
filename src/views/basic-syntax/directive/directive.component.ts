@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HighlightDirective } from '@directive/highlight.directive';
-import { PreHighlightDirective } from '@directive/pre-highlight.directive';
+import { HighlightDirective } from '@directives/highlight.directive';
+import { PreHighlightDirective } from '@directives/pre-highlight.directive';
 
 @Component({
   selector: 'directive',

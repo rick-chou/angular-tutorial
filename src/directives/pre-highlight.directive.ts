@@ -1,10 +1,10 @@
-import { Directive, ElementRef, DoCheck } from '@angular/core';
+import { Directive, ElementRef, DoCheck, OnInit } from '@angular/core';
 
 @Directive({
   selector: '[preHighlight]',
   standalone: true,
 })
-export class PreHighlightDirective implements DoCheck {
+export class PreHighlightDirective implements OnInit, DoCheck {
   constructor(private el: ElementRef) {}
 
   ngOnInit() {
