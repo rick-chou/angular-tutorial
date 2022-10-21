@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkng_tutorial=self.webpackChunkng_tutorial||[]).push([[43],{6043:(l,e,n)=>{n.r(e),n.d(e,{HttpComponent:()=>u});var o=n(4650);let u=(()=>{class t{}return t.\u0275fac=function(a){return new(a||t)},t.\u0275cmp=o.Xpm({type:t,selectors:[["http"]],standalone:!0,features:[o.jDz],decls:0,vars:0,template:function(a,s){},encapsulation:2}),t})()}}]);
