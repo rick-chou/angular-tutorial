@@ -3,7 +3,6 @@ import { HttpService } from './http.service';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzUploadFile, NzUploadModule } from 'ng-zorro-antd/upload';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'http',
@@ -14,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
 export class HttpComponent implements OnInit {
   public fileList: NzUploadFile[] = [];
 
-  constructor(private http: HttpService, private httpClient: HttpClient) {}
+  constructor(private http: HttpService) {}
   ngOnInit(): void {}
 
   public handleUpload = (file: NzUploadFile, fileList: NzUploadFile[]) => {
@@ -25,4 +24,12 @@ export class HttpComponent implements OnInit {
     });
     return false;
   };
+
+  public fetchErrorRequest() {
+    this.http.echoCode('get', { code: 100 }).subscribe(console.log);
+    this.http.echoCode('post', { code: 200 }).subscribe(console.log);
+    this.http.echoCode('delete', { code: 301 }).subscribe(console.log);
+    this.http.echoCode('put', { code: 403 }).subscribe(console.log);
+    this.http.echoCode('patch', { code: 500 }).subscribe(console.log);
+  }
 }
