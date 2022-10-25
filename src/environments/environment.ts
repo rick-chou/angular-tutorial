@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  backend: '/api',
+  backend: 'http://124.223.71.181:3000/express',
 };
 
 /*
